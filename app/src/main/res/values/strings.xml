@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">The Weather</string>
+
+    <string name="input_location_text_placeholder">Location</string>
+    <string name="input_location_button_text">Go!</string>
+    <string name="input_location_label_text">Tell me where to look for weather:</string>
 </resources>
