@@ -10,13 +10,17 @@ class WeatherViewModel(application: Application): AndroidViewModel(application) 
     private val data: MutableLiveData<WeatherData> = MutableLiveData()
 
     fun getWeatherData(location: String) {
-        val latitude: Float = 12.5f
-        val longitude: Float = 13.9f
-        loadWeatherData(latitude, longitude)
+        GlobalScope.launch {
+            val geocodingData = GeocodingApiClient().sendRequest(location)
+            val latitude = geocodingData.results[0].geometry.location.lat
+            val longitude  = geocodingData.results[0].geometry.location.lng
+            loadWeatherData(latitude, longitude)
+        }
+
     }
 
-    fun loadWeatherData(latitude: Float, longitude: Float) {
-        GlobalScope.launch {
+    suspend fun loadWeatherData(latitude: Float, longitude: Float) {
+        coroutineScope {
             val weatherData = async { WeatherApiClient().sendRequest(latitude, longitude) }
             data.postValue(weatherData.await())
         }

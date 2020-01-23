@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProviders
-import kotlinx.android.synthetic.main.fragment_input.*
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
