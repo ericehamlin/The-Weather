@@ -6,10 +6,11 @@ import com.squareup.okhttp.Request
 
 
 class WeatherApiClient {
+    val API_KEY = "c433b09ef235354c97b87ca12dde6d65"
+    val ENDPOINT = "https://api.darksky.net/forecast"
 
-    suspend fun sendRequest(): WeatherData {
-        val apiKey = "c433b09ef235354c97b87ca12dde6d65"
-        val url = "https://api.darksky.net/forecast/$apiKey/42.3601,-71.0589"
+    suspend fun sendRequest(latitude: Float, longitude: Float): WeatherData {
+        val url = "$ENDPOINT/$API_KEY/$latitude, $longitude"
         val client = OkHttpClient()
         val request = Request.Builder()
             .url(url)
