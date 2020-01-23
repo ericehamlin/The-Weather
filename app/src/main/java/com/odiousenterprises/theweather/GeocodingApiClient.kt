@@ -4,8 +4,8 @@ import com.google.gson.Gson
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
 
-// TODO singleton, cache
-class GeocodingApiClient {
+// TODO  cache
+object GeocodingApiClient {
 
     val ENDPOINT = "https://maps.googleapis.com/maps/api/geocode/json"
     val API_KEY = "AIzaSyBnYhVeooAzlhJ-psVUsNyYwLAdlYwUb8A"

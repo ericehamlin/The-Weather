@@ -11,7 +11,7 @@ class WeatherViewModel(application: Application): AndroidViewModel(application) 
 
     fun getWeatherData(location: String) {
         GlobalScope.launch {
-            val geocodingData = GeocodingApiClient().sendRequest(location)
+            val geocodingData = GeocodingApiClient.sendRequest(location)
             val latitude = geocodingData.results[0].geometry.location.lat
             val longitude  = geocodingData.results[0].geometry.location.lng
             loadWeatherData(latitude, longitude)
@@ -21,7 +21,7 @@ class WeatherViewModel(application: Application): AndroidViewModel(application) 
 
     suspend fun loadWeatherData(latitude: Float, longitude: Float) {
         coroutineScope {
-            val weatherData = async { WeatherApiClient().sendRequest(latitude, longitude) }
+            val weatherData = async { WeatherApiClient.sendRequest(latitude, longitude) }
             data.postValue(weatherData.await())
         }
     }

@@ -4,8 +4,8 @@ import com.google.gson.Gson
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
 
-// TODO singleton, cache
-class WeatherApiClient {
+// TODO cache
+object WeatherApiClient {
     val API_KEY = "c433b09ef235354c97b87ca12dde6d65"
     val ENDPOINT = "https://api.darksky.net/forecast"
 
