@@ -7,4 +7,5 @@
 
     <string name="label_humidity">Humidity</string>
     <string name="label_precipitation">Precipitation</string>
+    <string name="label_uv">UV Index</string>
 </resources>
