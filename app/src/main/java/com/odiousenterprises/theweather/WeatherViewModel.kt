@@ -7,26 +7,32 @@ import kotlinx.coroutines.*
 
 class WeatherViewModel(application: Application): AndroidViewModel(application) {
 
-    private val data: MutableLiveData<WeatherData> = MutableLiveData()
+    private val geocodingData: MutableLiveData<GeocodingData> = MutableLiveData()
+    private val weatherData: MutableLiveData<WeatherData> = MutableLiveData()
 
     fun getCurrentWeatherData(): MutableLiveData<WeatherData> {
-        return data;
+        return weatherData;
+    }
+
+    fun getCurrentGeocodingData(): MutableLiveData<GeocodingData> {
+        return geocodingData;
     }
 
     fun getWeatherData(location: String) {
         GlobalScope.launch {
-            val geocodingData = GeocodingApiClient.sendRequest(location)
-            val latitude = geocodingData.results[0].geometry.location.lat
-            val longitude  = geocodingData.results[0].geometry.location.lng
+            val geo = GeocodingApiClient.sendRequest(location)
+            val latitude = geo.results[0].geometry.location.lat
+            val longitude  = geo.results[0].geometry.location.lng
             loadWeatherData(latitude, longitude)
+            geocodingData.postValue(geo)
         }
 
     }
 
     suspend fun loadWeatherData(latitude: Float, longitude: Float) {
         coroutineScope {
-            val weatherData = async { WeatherApiClient.sendRequest(latitude, longitude) }
-            data.postValue(weatherData.await())
+            val response = async { WeatherApiClient.sendRequest(latitude, longitude) }
+            weatherData.postValue(response.await())
         }
     }
 }
