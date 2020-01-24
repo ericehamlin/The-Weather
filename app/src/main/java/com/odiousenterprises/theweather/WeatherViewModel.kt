@@ -9,6 +9,10 @@ class WeatherViewModel(application: Application): AndroidViewModel(application) 
 
     private val data: MutableLiveData<WeatherData> = MutableLiveData()
 
+    fun getCurrentWeatherData(): MutableLiveData<WeatherData> {
+        return data;
+    }
+
     fun getWeatherData(location: String) {
         GlobalScope.launch {
             val geocodingData = GeocodingApiClient.sendRequest(location)
