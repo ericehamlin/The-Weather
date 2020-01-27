@@ -1,5 +1,6 @@
 package com.odiousenterprises.theweather
 
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -9,9 +10,10 @@ import org.junit.Assert.*
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class ExampleUnitTest {
+class WeatherApiClientTest {
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun sendRequest_withInvalidLatitude_doesSomethingBadNotSureWhatYet() {
+        val result = runBlocking { WeatherApiClient.sendRequest(999f, 26f) }
+        println(result)
     }
 }

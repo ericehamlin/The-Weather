@@ -19,6 +19,8 @@ object GeocodingApiClient {
 
         val response = client.newCall(request).execute()
         val geocodingData = Gson().fromJson(response.body().string(), GeocodingData::class.java)
+        if (geocodingData.results.isEmpty()) throw RuntimeException("Not a valid location")
+
         return geocodingData
     }
 }
