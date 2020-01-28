@@ -8,7 +8,7 @@ import com.squareup.okhttp.Request
 object GeocodingApiClient {
 
     val ENDPOINT = "https://maps.googleapis.com/maps/api/geocode/json"
-    val API_KEY = "AIzaSyBnYhVeooAzlhJ-psVUsNyYwLAdlYwUb8A"
+    val API_KEY = BuildConfig.GEOCODING_API_KEY
 
     suspend fun sendRequest(location:String): GeocodingData {
         val url = "$ENDPOINT?address=$location&key=$API_KEY"

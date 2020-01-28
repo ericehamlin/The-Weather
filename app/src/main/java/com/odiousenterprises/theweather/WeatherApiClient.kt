@@ -6,7 +6,7 @@ import com.squareup.okhttp.Request
 
 // TODO cache
 object WeatherApiClient {
-    val API_KEY = "c433b09ef235354c97b87ca12dde6d65"
+    val API_KEY = BuildConfig.WEATHER_API_KEY
     val ENDPOINT = "https://api.darksky.net/forecast"
 
     suspend fun sendRequest(latitude: Float, longitude: Float): WeatherData {

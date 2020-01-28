@@ -4,6 +4,11 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+def apikeyPropertiesFile = rootProject.file("apikey.properties")
+def apikeyProperties = new Properties()
+apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -14,6 +19,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "GEOCODING_API_KEY", apikeyProperties['GEOCODING_API_KEY'])
+        buildConfigField("String", "WEATHER_API_KEY", apikeyProperties['WEATHER_API_KEY'])
+        manifestPlaceholders = [GOOGLE_MAPS_API_KEY: apikeyProperties['GOOGLE_MAPS_API_KEY']]
     }
     buildTypes {
         release {
